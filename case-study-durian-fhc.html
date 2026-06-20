@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Durian FHC Case Study — Harsh Chheda</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0A0E1A;
+    --navy-mid: #111827;
+    --navy-card: #161D2E;
+    --blue: #1B4FD8;
+    --cyan: #06B6D4;
+    --cyan-dim: rgba(6,182,212,0.12);
+    --white: #F8FAFC;
+    --muted: #94A3B8;
+    --muted-dark: #64748B;
+    --border: rgba(255,255,255,0.07);
+    --text: #E2E8F0;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--navy);
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.7;
+  }
+  h1, h2, h3, .display { font-family: 'Space Grotesk', sans-serif; font-weight: 600; line-height: 1.15; }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    padding: 18px 60px;
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(10,14,26,0.9);
+    backdrop-filter: blur(12px);
+    border-bottom: 0.5px solid var(--border);
+  }
+  .back-link {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 13px; font-weight: 500; color: var(--muted);
+    text-decoration: none; transition: color 0.2s;
+  }
+  .back-link:hover { color: var(--cyan); }
+  .nav-cta {
+    background: var(--cyan); color: var(--navy);
+    padding: 9px 20px; border-radius: 7px;
+    font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 13px;
+    text-decoration: none;
+  }
+
+  /* HERO */
+  .cs-hero {
+    padding: 80px 60px 60px;
+    max-width: 980px; margin: 0 auto;
+    border-bottom: 0.5px solid var(--border);
+  }
+  .cs-eyebrow {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 12px; font-weight: 600; color: var(--cyan);
+    letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 20px;
+  }
+  .cs-eyebrow::before { content: ''; width: 24px; height: 1px; background: var(--cyan); }
+  .cs-title {
+    font-size: clamp(32px, 4vw, 48px); font-weight: 700; color: var(--white);
+    letter-spacing: -0.02em; margin-bottom: 18px; line-height: 1.1;
+  }
+  .cs-subtitle {
+    font-size: 18px; color: var(--muted); max-width: 640px; margin-bottom: 36px; line-height: 1.6;
+  }
+  .cs-meta-row {
+    display: flex; gap: 36px; flex-wrap: wrap;
+  }
+  .cs-meta-item { }
+  .cs-meta-label { font-size: 11px; color: var(--muted-dark); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 4px; }
+  .cs-meta-value { font-family: 'Space Grotesk', sans-serif; font-size: 14px; font-weight: 600; color: var(--text); }
+
+  /* HEADLINE METRICS BAND */
+  .metrics-band {
+    max-width: 980px; margin: 0 auto;
+    padding: 48px 60px;
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
+    border-bottom: 0.5px solid var(--border);
+  }
+  .metric-block { text-align: left; }
+  .metric-num {
+    font-family: 'Space Grotesk', sans-serif; font-size: clamp(28px, 3vw, 38px); font-weight: 700;
+    color: var(--white); letter-spacing: -0.02em; line-height: 1;
+  }
+  .metric-num .accent { color: var(--cyan); }
+  .metric-label { font-size: 12px; color: var(--muted); margin-top: 8px; line-height: 1.4; }
+
+  /* CONTENT */
+  .cs-section {
+    max-width: 720px; margin: 0 auto;
+    padding: 56px 60px;
+    border-bottom: 0.5px solid var(--border);
+  }
+  .cs-section:last-of-type { border-bottom: none; }
+  .cs-section-label {
+    font-size: 11px; font-weight: 600; color: var(--cyan);
+    letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 16px;
+  }
+  .cs-section-title {
+    font-size: 26px; font-weight: 700; color: var(--white);
+    letter-spacing: -0.01em; margin-bottom: 24px;
+  }
+  .cs-section p {
+    color: var(--muted); font-size: 15px; line-height: 1.8; margin-bottom: 18px;
+  }
+  .cs-section p strong { color: var(--text); font-weight: 500; }
+  .cs-section ul { margin: 20px 0; padding-left: 0; list-style: none; }
+  .cs-section li {
+    color: var(--muted); font-size: 15px; line-height: 1.7; margin-bottom: 14px;
+    padding-left: 22px; position: relative;
+  }
+  .cs-section li::before { content: '→'; position: absolute; left: 0; color: var(--cyan); font-size: 13px; }
+  .cs-section li strong { color: var(--text); font-weight: 500; }
+
+  /* FUNNEL DIAGRAM */
+  .funnel-wrap {
+    margin: 32px 0;
+    display: flex; flex-direction: column; gap: 2px;
+  }
+  .funnel-stage {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 20px; background: var(--navy-card);
+    border: 0.5px solid var(--border); border-radius: 8px;
+  }
+  .funnel-stage.highlight { border-color: rgba(6,182,212,0.35); background: rgba(6,182,212,0.06); }
+  .funnel-stage-name { font-size: 13px; font-weight: 500; color: var(--text); }
+  .funnel-stage-tag { font-size: 10px; font-weight: 600; color: var(--cyan); letter-spacing: 0.05em; text-transform: uppercase; }
+  .funnel-arrow { text-align: center; color: var(--muted-dark); font-size: 12px; padding: 2px 0; }
+
+  /* TIMELINE / BEFORE-AFTER */
+  .ba-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 24px 0;
+  }
+  .ba-card {
+    padding: 20px; border-radius: 10px; border: 0.5px solid var(--border);
+  }
+  .ba-card.before { background: rgba(255,100,100,0.04); border-color: rgba(255,100,100,0.15); }
+  .ba-card.after { background: rgba(6,182,212,0.05); border-color: rgba(6,182,212,0.2); }
+  .ba-label { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 10px; }
+  .ba-card.before .ba-label { color: #FF8A8A; }
+  .ba-card.after .ba-label { color: var(--cyan); }
+  .ba-value { font-family: 'Space Grotesk', sans-serif; font-size: 24px; font-weight: 700; color: var(--white); }
+  .ba-sub { font-size: 12px; color: var(--muted-dark); margin-top: 4px; }
+
+  /* CITY GRID */
+  .city-grid {
+    display: flex; flex-wrap: wrap; gap: 8px; margin: 20px 0;
+  }
+  .city-pill {
+    font-size: 12px; font-weight: 500; padding: 6px 14px; border-radius: 20px;
+    background: var(--navy-card); border: 0.5px solid var(--border); color: var(--text);
+  }
+
+  /* TABLE */
+  .data-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 13px; }
+  .data-table th {
+    text-align: left; padding: 10px 12px; color: var(--muted-dark);
+    font-weight: 500; font-size: 11px; letter-spacing: 0.04em; text-transform: uppercase;
+    border-bottom: 0.5px solid var(--border);
+  }
+  .data-table td { padding: 10px 12px; color: var(--text); border-bottom: 0.5px solid var(--border); }
+  .data-table tr:last-child td { border-bottom: none; }
+
+  /* CTA FOOTER */
+  .cs-cta {
+    max-width: 720px; margin: 0 auto; padding: 56px 60px 80px;
+    text-align: left;
+  }
+  .cs-cta-box {
+    padding: 32px; border-radius: 14px;
+    background: var(--navy-card); border: 0.5px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;
+  }
+  .cs-cta-text h3 { font-size: 18px; color: var(--white); margin-bottom: 6px; }
+  .cs-cta-text p { font-size: 13px; color: var(--muted-dark); margin: 0; }
+  .cs-cta-actions { display: flex; gap: 10px; }
+  .btn-primary {
+    background: var(--cyan); color: var(--navy); font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600; font-size: 13px; padding: 11px 22px; border-radius: 7px;
+    text-decoration: none; white-space: nowrap;
+  }
+  .btn-secondary {
+    background: transparent; color: var(--text); font-family: 'Space Grotesk', sans-serif;
+    font-weight: 500; font-size: 13px; padding: 11px 22px; border-radius: 7px;
+    border: 0.5px solid rgba(255,255,255,0.2); text-decoration: none; white-space: nowrap;
+  }
+
+  footer { text-align: center; padding: 28px; font-size: 12px; color: var(--muted-dark); }
+
+  @media (max-width: 768px) {
+    nav { padding: 14px 20px; }
+    .cs-hero { padding: 48px 20px 40px; }
+    .cs-title { font-size: 26px; }
+    .cs-subtitle { font-size: 15px; }
+    .cs-meta-row { gap: 20px; }
+    .metrics-band { grid-template-columns: 1fr 1fr; padding: 32px 20px; gap: 24px 16px; }
+    .cs-section { padding: 36px 20px; }
+    .cs-section-title { font-size: 21px; }
+    .ba-grid { grid-template-columns: 1fr; }
+    .data-table { font-size: 12px; }
+    .data-table th, .data-table td { padding: 8px 6px; }
+    .cs-cta { padding: 36px 20px 56px; }
+    .cs-cta-box { flex-direction: column; align-items: flex-start; padding: 24px; }
+    .cs-cta-actions { width: 100%; }
+    .cs-cta-actions a { flex: 1; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="harsh-chheda-portfolio.html#work" class="back-link">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    Back to portfolio
+  </a>
+  <a href="harsh-chheda-portfolio.html#contact" class="nav-cta">Hire Me</a>
+</nav>
+
+<div class="cs-hero">
+  <div class="cs-eyebrow">Case Study · Lead Generation</div>
+  <h1 class="cs-title">Turning CPL into a vanity metric for Durian FHC</h1>
+  <p class="cs-subtitle">
+    How shifting the primary KPI from cost-per-lead to CRM-verified Interested leads and store walk-ins drove an 83% CPL reduction — without anyone asking for it.
+  </p>
+  <div class="cs-meta-row">
+    <div class="cs-meta-item">
+      <div class="cs-meta-label">Client</div>
+      <div class="cs-meta-value">Durian Full Home Customisation</div>
+    </div>
+    <div class="cs-meta-item">
+      <div class="cs-meta-label">Timeline</div>
+      <div class="cs-meta-value">Apr 2025 – Present</div>
+    </div>
+    <div class="cs-meta-item">
+      <div class="cs-meta-label">Role</div>
+      <div class="cs-meta-value">Media Planning & Execution (Full Ownership)</div>
+    </div>
+    <div class="cs-meta-item">
+      <div class="cs-meta-label">Platforms</div>
+      <div class="cs-meta-value">Google Search, Pmax · Meta Lead Form</div>
+    </div>
+  </div>
+</div>
+
+<div class="metrics-band">
+  <div class="metric-block">
+    <div class="metric-num">83<span class="accent">%</span></div>
+    <div class="metric-label">CPL reduction, Mar '25 → Dec '25</div>
+  </div>
+  <div class="metric-block">
+    <div class="metric-num">540<span class="accent">+</span></div>
+    <div class="metric-label">Interested leads (CRM-verified)</div>
+  </div>
+  <div class="metric-block">
+    <div class="metric-num">50<span class="accent">+</span></div>
+    <div class="metric-label">Store walk-ins generated</div>
+  </div>
+  <div class="metric-block">
+    <div class="metric-num">6</div>
+    <div class="metric-label">Cities scaled across</div>
+  </div>
+</div>
+
+<div class="cs-section">
+  <div class="cs-section-label">The Problem</div>
+  <h2 class="cs-section-title">Lead volume was up. Sales weren't impressed.</h2>
+  <p>
+    When I took over Durian FHC's media account in April 2025, the account was already running — Google Search, Pmax Store Visit, and Meta Lead Form campaigns were live across Mumbai and Thane. Lead volume looked fine on paper. Cost-per-lead looked fine on paper.
+  </p>
+  <p>
+    But the sales team's pipeline told a different story. A large share of "leads" reaching the CRM were dropping at the first call — wrong number, no budget, no real intent. The campaigns were optimised for the wrong thing: <strong>any form fill</strong>, not a person who'd actually walk into a showroom or have a real conversation with a designer.
+  </p>
+  <p>
+    The real fix wasn't a creative refresh or a bigger budget. It was redefining what counted as a win.
+  </p>
+</div>
+
+<div class="cs-section">
+  <div class="cs-section-label">The Approach</div>
+  <h2 class="cs-section-title">Tracking leads through the actual sales funnel, not just the form submit</h2>
+  <p>
+    Instead of treating every Meta Lead Form or Google Pmax conversion as a finished result, I connected campaign performance directly to Durian's CRM stage data — mapping every single lead through what actually happened to it after the form was filled.
+  </p>
+  <div class="funnel-wrap">
+    <div class="funnel-stage">
+      <span class="funnel-stage-name">Lead Form / Website Submit</span>
+      <span class="funnel-stage-tag">Top of funnel</span>
+    </div>
+    <div class="funnel-arrow">↓</div>
+    <div class="funnel-stage">
+      <span class="funnel-stage-name">First Discussion Done</span>
+      <span class="funnel-stage-tag">Contacted</span>
+    </div>
+    <div class="funnel-arrow">↓</div>
+    <div class="funnel-stage highlight">
+      <span class="funnel-stage-name">Interested <span style="color:var(--muted-dark);font-weight:400;">— primary KPI</span></span>
+      <span class="funnel-stage-tag">Real intent</span>
+    </div>
+    <div class="funnel-arrow">↓</div>
+    <div class="funnel-stage highlight">
+      <span class="funnel-stage-name">Store Walk-in <span style="color:var(--muted-dark);font-weight:400;">— primary KPI</span></span>
+      <span class="funnel-stage-tag">Showroom visit</span>
+    </div>
+    <div class="funnel-arrow">↓</div>
+    <div class="funnel-stage">
+      <span class="funnel-stage-name">Qualified Deal → Order Won</span>
+      <span class="funnel-stage-tag">Revenue</span>
+    </div>
+  </div>
+  <p>
+    With this mapping in place, CPL became a secondary number — useful for budget pacing, but no longer the metric driving optimisation decisions. <strong>Interested leads and store walk-ins</strong> became the numbers that mattered, because they were the ones that correlated with actual revenue.
+  </p>
+  <p>This changed three things about how the account was run:</p>
+  <ul>
+    <li><strong>Budget reallocation by quality, not volume.</strong> Keyword groups, audiences, and placements that produced high lead counts but low Interested-stage conversion got deprioritised — even when their CPL looked great.</li>
+    <li><strong>Platform-level restructuring.</strong> Meta's split between Website Leads, Lead Form, Profile Visit, and Awareness campaigns was rebalanced based on which format actually pushed people to the Interested stage, not just which had the lowest cost-per-click.</li>
+    <li><strong>City-by-city iteration.</strong> Mumbai and Thane were the original markets; Delhi, Hyderabad, Bangalore, and Noida were added progressively, each one benchmarked against the funnel data from the cities before it rather than starting from a blank slate.</li>
+  </ul>
+  <div class="city-grid">
+    <span class="city-pill">Mumbai</span>
+    <span class="city-pill">Thane</span>
+    <span class="city-pill">Delhi</span>
+    <span class="city-pill">Hyderabad</span>
+    <span class="city-pill">Bangalore</span>
+    <span class="city-pill">Noida</span>
+  </div>
+</div>
+
+<div class="cs-section">
+  <div class="cs-section-label">The Result</div>
+  <h2 class="cs-section-title">CPL fell by 83% — as a side effect, not the goal</h2>
+  <p>
+    The irony: by stopping optimisation for CPL directly and optimising for funnel quality instead, CPL dropped anyway — because the campaigns got better at finding people who were actually going to take the next step.
+  </p>
+  <div class="ba-grid">
+    <div class="ba-card before">
+      <div class="ba-label">March 2025</div>
+      <div class="ba-value">₹4,268</div>
+      <div class="ba-sub">Blended CPL · 61 leads that month</div>
+    </div>
+    <div class="ba-card after">
+      <div class="ba-label">December 2025</div>
+      <div class="ba-value">₹710</div>
+      <div class="ba-sub">Blended CPL · 141 leads that month</div>
+    </div>
+  </div>
+  <p>Meta-specific CPL told the same story, even more sharply:</p>
+  <div class="ba-grid">
+    <div class="ba-card before">
+      <div class="ba-label">Meta CPL · Mar 2025</div>
+      <div class="ba-value">₹3,192</div>
+    </div>
+    <div class="ba-card after">
+      <div class="ba-label">Meta CPL · Dec 2025</div>
+      <div class="ba-value">₹602</div>
+    </div>
+  </div>
+  <p>
+    The best single month on record was <strong>September 2025</strong> — 250 leads at a blended ₹816 CPL, with a noticeably higher proportion reaching the Interested stage than in any prior month.
+  </p>
+  <p>
+    Across the full CRM dataset spanning the account's lifetime, campaigns sourced through Meta and the website have produced <strong>540+ leads that reached the Interested stage</strong> and <strong>50+ verified store walk-ins</strong> — the two numbers that now anchor every monthly review with the client, well above headline lead count or CPL.
+  </p>
+</div>
+
+<div class="cs-section">
+  <div class="cs-section-label">What I'd Do Next</div>
+  <h2 class="cs-section-title">The funnel mapping is the playbook now</h2>
+  <p>
+    This approach — tying ad platform data to CRM stage progression instead of stopping at the conversion event — is now the lens I apply to every account I run, including Durian Furniture and Kotak Mutual Fund. A lead is only worth what happens to it after the click.
+  </p>
+</div>
+
+<div class="cs-cta">
+  <div class="cs-cta-box">
+    <div class="cs-cta-text">
+      <h3>Want the full breakdown?</h3>
+      <p>Happy to walk through the campaign structure and reporting setup in detail.</p>
+    </div>
+    <div class="cs-cta-actions">
+      <a href="harsh-chheda-portfolio.html#work" class="btn-secondary">View other work</a>
+      <a href="harsh-chheda-portfolio.html#contact" class="btn-primary">Get in touch</a>
+    </div>
+  </div>
+</div>
+
+<footer>© 2026 Harsh Chheda · Paid Media Analyst, Mumbai</footer>
+
+</body>
+</html>
