@@ -30,7 +30,6 @@
   }
   h1, h2, h3, .display { font-family: 'Space Grotesk', sans-serif; font-weight: 600; line-height: 1.15; }
 
-  /* NAV */
   nav {
     position: sticky; top: 0; z-index: 100;
     padding: 18px 60px;
@@ -52,7 +51,6 @@
     text-decoration: none;
   }
 
-  /* HERO */
   .cs-hero {
     padding: 80px 60px 60px;
     max-width: 980px; margin: 0 auto;
@@ -71,21 +69,16 @@
   .cs-subtitle {
     font-size: 18px; color: var(--muted); max-width: 640px; margin-bottom: 36px; line-height: 1.6;
   }
-  .cs-meta-row {
-    display: flex; gap: 36px; flex-wrap: wrap;
-  }
-  .cs-meta-item { }
+  .cs-meta-row { display: flex; gap: 36px; flex-wrap: wrap; }
   .cs-meta-label { font-size: 11px; color: var(--muted-dark); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 4px; }
   .cs-meta-value { font-family: 'Space Grotesk', sans-serif; font-size: 14px; font-weight: 600; color: var(--text); }
 
-  /* HEADLINE METRICS BAND */
   .metrics-band {
     max-width: 980px; margin: 0 auto;
     padding: 48px 60px;
     display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
     border-bottom: 0.5px solid var(--border);
   }
-  .metric-block { text-align: left; }
   .metric-num {
     font-family: 'Space Grotesk', sans-serif; font-size: clamp(28px, 3vw, 38px); font-weight: 700;
     color: var(--white); letter-spacing: -0.02em; line-height: 1;
@@ -93,9 +86,8 @@
   .metric-num .accent { color: var(--cyan); }
   .metric-label { font-size: 12px; color: var(--muted); margin-top: 8px; line-height: 1.4; }
 
-  /* CONTENT */
   .cs-section {
-    max-width: 720px; margin: 0 auto;
+    max-width: 760px; margin: 0 auto;
     padding: 56px 60px;
     border-bottom: 0.5px solid var(--border);
   }
@@ -108,9 +100,7 @@
     font-size: 26px; font-weight: 700; color: var(--white);
     letter-spacing: -0.01em; margin-bottom: 24px;
   }
-  .cs-section p {
-    color: var(--muted); font-size: 15px; line-height: 1.8; margin-bottom: 18px;
-  }
+  .cs-section p { color: var(--muted); font-size: 15px; line-height: 1.8; margin-bottom: 18px; }
   .cs-section p strong { color: var(--text); font-weight: 500; }
   .cs-section ul { margin: 20px 0; padding-left: 0; list-style: none; }
   .cs-section li {
@@ -120,11 +110,7 @@
   .cs-section li::before { content: '→'; position: absolute; left: 0; color: var(--cyan); font-size: 13px; }
   .cs-section li strong { color: var(--text); font-weight: 500; }
 
-  /* FUNNEL DIAGRAM */
-  .funnel-wrap {
-    margin: 32px 0;
-    display: flex; flex-direction: column; gap: 2px;
-  }
+  .funnel-wrap { margin: 32px 0; display: flex; flex-direction: column; gap: 2px; }
   .funnel-stage {
     display: flex; align-items: center; justify-content: space-between;
     padding: 14px 20px; background: var(--navy-card);
@@ -135,13 +121,8 @@
   .funnel-stage-tag { font-size: 10px; font-weight: 600; color: var(--cyan); letter-spacing: 0.05em; text-transform: uppercase; }
   .funnel-arrow { text-align: center; color: var(--muted-dark); font-size: 12px; padding: 2px 0; }
 
-  /* TIMELINE / BEFORE-AFTER */
-  .ba-grid {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 24px 0;
-  }
-  .ba-card {
-    padding: 20px; border-radius: 10px; border: 0.5px solid var(--border);
-  }
+  .ba-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 24px 0; }
+  .ba-card { padding: 20px; border-radius: 10px; border: 0.5px solid var(--border); }
   .ba-card.before { background: rgba(255,100,100,0.04); border-color: rgba(255,100,100,0.15); }
   .ba-card.after { background: rgba(6,182,212,0.05); border-color: rgba(6,182,212,0.2); }
   .ba-label { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 10px; }
@@ -150,30 +131,39 @@
   .ba-value { font-family: 'Space Grotesk', sans-serif; font-size: 24px; font-weight: 700; color: var(--white); }
   .ba-sub { font-size: 12px; color: var(--muted-dark); margin-top: 4px; }
 
-  /* CITY GRID */
-  .city-grid {
-    display: flex; flex-wrap: wrap; gap: 8px; margin: 20px 0;
-  }
+  .city-grid { display: flex; flex-wrap: wrap; gap: 8px; margin: 20px 0; }
   .city-pill {
     font-size: 12px; font-weight: 500; padding: 6px 14px; border-radius: 20px;
     background: var(--navy-card); border: 0.5px solid var(--border); color: var(--text);
   }
+  .city-pill.muted { color: var(--muted-dark); border-style: dashed; }
 
-  /* TABLE */
-  .data-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 13px; }
-  .data-table th {
-    text-align: left; padding: 10px 12px; color: var(--muted-dark);
-    font-weight: 500; font-size: 11px; letter-spacing: 0.04em; text-transform: uppercase;
-    border-bottom: 0.5px solid var(--border);
+  /* CHART */
+  .chart-wrap {
+    margin: 28px 0; padding: 24px 20px 16px;
+    background: var(--navy-card); border: 0.5px solid var(--border); border-radius: 12px;
   }
-  .data-table td { padding: 10px 12px; color: var(--text); border-bottom: 0.5px solid var(--border); }
-  .data-table tr:last-child td { border-bottom: none; }
+  .chart-legend { display: flex; gap: 20px; margin-bottom: 16px; flex-wrap: wrap; }
+  .legend-item { display: flex; align-items: center; gap: 7px; font-size: 12px; color: var(--muted); }
+  .legend-dot { width: 9px; height: 9px; border-radius: 50%; }
+  .chart-caption { font-size: 11px; color: var(--muted-dark); margin-top: 12px; line-height: 1.6; }
 
-  /* CTA FOOTER */
-  .cs-cta {
-    max-width: 720px; margin: 0 auto; padding: 56px 60px 80px;
-    text-align: left;
+  /* TIMELINE - campaign evolution */
+  .evo-timeline { position: relative; margin: 28px 0; padding-left: 28px; border-left: 1.5px solid var(--border); }
+  .evo-item { position: relative; padding-bottom: 28px; }
+  .evo-item:last-child { padding-bottom: 0; }
+  .evo-item::before {
+    content: ''; position: absolute; left: -33.5px; top: 4px;
+    width: 8px; height: 8px; border-radius: 50%; background: var(--cyan);
+    border: 2px solid var(--navy);
   }
+  .evo-item.paused::before { background: var(--muted-dark); }
+  .evo-date { font-size: 11px; color: var(--cyan); font-weight: 600; letter-spacing: 0.05em; margin-bottom: 4px; }
+  .evo-item.paused .evo-date { color: var(--muted-dark); }
+  .evo-title { font-size: 14px; font-weight: 600; color: var(--white); margin-bottom: 4px; }
+  .evo-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+  .cs-cta { max-width: 760px; margin: 0 auto; padding: 56px 60px 80px; }
   .cs-cta-box {
     padding: 32px; border-radius: 14px;
     background: var(--navy-card); border: 0.5px solid var(--border);
@@ -205,30 +195,31 @@
     .cs-section { padding: 36px 20px; }
     .cs-section-title { font-size: 21px; }
     .ba-grid { grid-template-columns: 1fr; }
-    .data-table { font-size: 12px; }
-    .data-table th, .data-table td { padding: 8px 6px; }
     .cs-cta { padding: 36px 20px 56px; }
     .cs-cta-box { flex-direction: column; align-items: flex-start; padding: 24px; }
     .cs-cta-actions { width: 100%; }
     .cs-cta-actions a { flex: 1; text-align: center; }
+    .chart-wrap { padding: 18px 12px 12px; }
+    .evo-timeline { padding-left: 22px; }
+    .evo-item::before { left: -27.5px; }
   }
 </style>
 </head>
 <body>
 
 <nav>
-  <a href="harsh-chheda-portfolio.html#work" class="back-link">
+  <a href="index.html#work" class="back-link">
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
     Back to portfolio
   </a>
-  <a href="harsh-chheda-portfolio.html#contact" class="nav-cta">Hire Me</a>
+  <a href="index.html#contact" class="nav-cta">Hire Me</a>
 </nav>
 
 <div class="cs-hero">
   <div class="cs-eyebrow">Case Study · Lead Generation</div>
   <h1 class="cs-title">Turning CPL into a vanity metric for Durian FHC</h1>
   <p class="cs-subtitle">
-    How shifting the primary KPI from cost-per-lead to CRM-verified Interested leads and store walk-ins drove an 83% CPL reduction — without anyone asking for it.
+    How shifting the primary KPI from cost-per-lead to CRM-verified Interested leads and store walk-ins drove an 83% CPL reduction over 16 months — without ever optimising for CPL directly.
   </p>
   <div class="cs-meta-row">
     <div class="cs-meta-item">
@@ -237,7 +228,7 @@
     </div>
     <div class="cs-meta-item">
       <div class="cs-meta-label">Timeline</div>
-      <div class="cs-meta-value">Apr 2025 – Present</div>
+      <div class="cs-meta-value">Feb 2025 – Present</div>
     </div>
     <div class="cs-meta-item">
       <div class="cs-meta-label">Role</div>
@@ -273,13 +264,13 @@
   <div class="cs-section-label">The Problem</div>
   <h2 class="cs-section-title">Lead volume was up. Sales weren't impressed.</h2>
   <p>
-    When I took over Durian FHC's media account in April 2025, the account was already running — Google Search, Pmax Store Visit, and Meta Lead Form campaigns were live across Mumbai and Thane. Lead volume looked fine on paper. Cost-per-lead looked fine on paper.
+    I joined the Durian FHC account in <strong>February 2025</strong>, when the setup was deliberately simple — a single city (Mumbai), one Google Search campaign, and one Meta web-conversion campaign. That simplicity made sense at the start; the account needed to prove the channel worked before scaling spend or complexity.
   </p>
   <p>
-    But the sales team's pipeline told a different story. A large share of "leads" reaching the CRM were dropping at the first call — wrong number, no budget, no real intent. The campaigns were optimised for the wrong thing: <strong>any form fill</strong>, not a person who'd actually walk into a showroom or have a real conversation with a designer.
+    But as spend increased through March, a familiar problem showed up: lead volume looked healthy and CPL looked reasonable on paper, while the sales team's actual pipeline told a different story. A large share of "leads" reaching the CRM were dropping at the first call — wrong number, no real budget, no real intent.
   </p>
   <p>
-    The real fix wasn't a creative refresh or a bigger budget. It was redefining what counted as a win.
+    The campaigns were optimised for the wrong thing: <strong>any form fill</strong>, not a person who'd actually walk into a showroom or have a real conversation with a designer. The fix wasn't a creative refresh or a bigger budget — it was redefining what counted as a win.
   </p>
 </div>
 
@@ -318,12 +309,36 @@
   <p>
     With this mapping in place, CPL became a secondary number — useful for budget pacing, but no longer the metric driving optimisation decisions. <strong>Interested leads and store walk-ins</strong> became the numbers that mattered, because they were the ones that correlated with actual revenue.
   </p>
-  <p>This changed three things about how the account was run:</p>
-  <ul>
-    <li><strong>Budget reallocation by quality, not volume.</strong> Keyword groups, audiences, and placements that produced high lead counts but low Interested-stage conversion got deprioritised — even when their CPL looked great.</li>
-    <li><strong>Platform-level restructuring.</strong> Meta's split between Website Leads, Lead Form, Profile Visit, and Awareness campaigns was rebalanced based on which format actually pushed people to the Interested stage, not just which had the lowest cost-per-click.</li>
-    <li><strong>City-by-city iteration.</strong> Mumbai and Thane were the original markets; Delhi, Hyderabad, Bangalore, and Noida were added progressively, each one benchmarked against the funnel data from the cities before it rather than starting from a blank slate.</li>
-  </ul>
+
+  <h3 style="font-size:17px;color:var(--white);margin:32px 0 16px;font-weight:600;">How the campaign mix evolved</h3>
+  <p style="margin-bottom:8px;">The account scaled in deliberate stages rather than launching everything at once:</p>
+  <div class="evo-timeline">
+    <div class="evo-item">
+      <div class="evo-date">FEB 2025</div>
+      <div class="evo-title">Single-city, single-channel start</div>
+      <div class="evo-desc">Mumbai only. One Google Search campaign (Generic + Brand), one Meta Web Conversion campaign. Proving the channel before scaling.</div>
+    </div>
+    <div class="evo-item">
+      <div class="evo-date">MAR 2025</div>
+      <div class="evo-title">Pmax Store Visit + Meta Lead Form added</div>
+      <div class="evo-desc">Introduced Google Pmax with Store Visit objective and Meta Lead Form campaigns, splitting Meta spend across Website Leads and Lead Form formats for the first time.</div>
+    </div>
+    <div class="evo-item paused">
+      <div class="evo-date">MAR – APR 2025 · PAUSED</div>
+      <div class="evo-title">Profile Visit (follower growth) campaign</div>
+      <div class="evo-desc">Ran a Meta Profile Visit campaign targeting Interest & Lookalike audiences to build the brand's Instagram following. Paused by client decision — not a performance issue, just a shift in priority toward direct lead generation.</div>
+    </div>
+    <div class="evo-item">
+      <div class="evo-date">MID 2025</div>
+      <div class="evo-title">RLSA + Click-to-WhatsApp introduced</div>
+      <div class="evo-desc">Added Google Search RLSA (remarketing list audiences layered on keywords) and Meta Click-to-WhatsApp as a lower-friction conversion path alongside the existing Lead Form.</div>
+    </div>
+    <div class="evo-item">
+      <div class="evo-date">2025 – 2026</div>
+      <div class="evo-title">Multi-city expansion</div>
+      <div class="evo-desc">Scaled progressively from Mumbai into Thane, Delhi, Hyderabad, Bangalore, and Noida — each new city benchmarked against the funnel data from the markets before it.</div>
+    </div>
+  </div>
   <div class="city-grid">
     <span class="city-pill">Mumbai</span>
     <span class="city-pill">Thane</span>
@@ -336,10 +351,21 @@
 
 <div class="cs-section">
   <div class="cs-section-label">The Result</div>
-  <h2 class="cs-section-title">CPL fell by 83% — as a side effect, not the goal</h2>
+  <h2 class="cs-section-title">CPL fell 83% — as a side effect, not the goal</h2>
   <p>
     The irony: by stopping optimisation for CPL directly and optimising for funnel quality instead, CPL dropped anyway — because the campaigns got better at finding people who were actually going to take the next step.
   </p>
+
+  <div class="chart-wrap">
+    <div class="chart-legend">
+      <div class="legend-item"><span class="legend-dot" style="background:#1B4FD8;"></span> Monthly Spend (₹)</div>
+      <div class="legend-item"><span class="legend-dot" style="background:#06B6D4;"></span> Blended CPL (₹)</div>
+    </div>
+    <svg viewBox="0 0 820 320" style="width:100%;height:auto;overflow:visible;" id="fhc-chart"></svg>
+    <div class="chart-caption">Feb 2025 – Jun 2026 · Jun '26 is a partial month (in progress at time of writing) · Left axis: monthly spend in ₹ · Right axis: blended CPL in ₹</div>
+  </div>
+
+  <p>Comparing the start of the account to where it stands most recently:</p>
   <div class="ba-grid">
     <div class="ba-card before">
       <div class="ba-label">March 2025</div>
@@ -347,11 +373,27 @@
       <div class="ba-sub">Blended CPL · 61 leads that month</div>
     </div>
     <div class="ba-card after">
-      <div class="ba-label">December 2025</div>
+      <div class="ba-label">May 2026</div>
+      <div class="ba-value">₹1,238</div>
+      <div class="ba-sub">Blended CPL · 122 leads that month, across 6 cities</div>
+    </div>
+  </div>
+  <p>And the single best month recorded in between, which still stands as the account's high point:</p>
+  <div class="ba-grid">
+    <div class="ba-card after">
+      <div class="ba-label">December 2025 · Lowest CPL</div>
       <div class="ba-value">₹710</div>
       <div class="ba-sub">Blended CPL · 141 leads that month</div>
     </div>
+    <div class="ba-card after">
+      <div class="ba-label">September 2025 · Best volume</div>
+      <div class="ba-value">250 leads</div>
+      <div class="ba-sub">At ₹816 blended CPL — the strongest balance of volume and efficiency</div>
+    </div>
   </div>
+  <p style="font-size:13px;color:var(--muted-dark);">
+    CPL has fluctuated month to month since Dec '25 (₹967–₹1,514) as the account expanded into five new cities — each new market briefly raises blended CPL before its own funnel data optimises it down, which is expected and visible in the chart above.
+  </p>
   <p>Meta-specific CPL told the same story, even more sharply:</p>
   <div class="ba-grid">
     <div class="ba-card before">
@@ -364,10 +406,7 @@
     </div>
   </div>
   <p>
-    The best single month on record was <strong>September 2025</strong> — 250 leads at a blended ₹816 CPL, with a noticeably higher proportion reaching the Interested stage than in any prior month.
-  </p>
-  <p>
-    Across the full CRM dataset spanning the account's lifetime, campaigns sourced through Meta and the website have produced <strong>540+ leads that reached the Interested stage</strong> and <strong>50+ verified store walk-ins</strong> — the two numbers that now anchor every monthly review with the client, well above headline lead count or CPL.
+    Across the CRM dataset spanning the account's full lifetime (Feb 2025 – Jun 2026), campaigns sourced through Meta and the website have produced <strong>540+ leads that reached the Interested stage</strong> and <strong>50+ verified store walk-ins</strong> — the two numbers that now anchor every monthly review with the client, well above headline lead count or CPL. Total managed spend across the period: <strong>₹32.4L+</strong>, generating <strong>2,500+ total leads</strong>.
   </p>
 </div>
 
@@ -384,15 +423,121 @@
     <div class="cs-cta-text">
       <h3>Want the full breakdown?</h3>
       <p>Happy to walk through the campaign structure and reporting setup in detail.</p>
+      <p style="margin-top:10px;font-size:13px;color:var(--muted);">
+        <a href="mailto:2002harshchheda@gmail.com" style="color:var(--cyan);text-decoration:none;">2002harshchheda@gmail.com</a>
+        &nbsp;·&nbsp;
+        <a href="tel:+919326074411" style="color:var(--cyan);text-decoration:none;">+91 93260 74411</a>
+      </p>
     </div>
     <div class="cs-cta-actions">
-      <a href="harsh-chheda-portfolio.html#work" class="btn-secondary">View other work</a>
-      <a href="harsh-chheda-portfolio.html#contact" class="btn-primary">Get in touch</a>
+      <a href="index.html#work" class="btn-secondary">View other work</a>
+      <a href="index.html#contact" class="btn-primary">Get in touch</a>
     </div>
   </div>
 </div>
 
 <footer>© 2026 Harsh Chheda · Paid Media Analyst, Mumbai</footer>
+
+<script>
+(function() {
+  const data = [
+    ["Feb '25", 87766, 3134],["Mar '25", 260343, 4268],["Apr '25", 247852, 2174],
+    ["May '25", 207400, 1773],["Jun '25", 248981, 1766],["Jul '25", 288455, 1380],
+    ["Aug '25", 233908, 991],["Sep '25", 203939, 816],["Oct '25", 185929, 1248],
+    ["Nov '25", 184661, 967],["Dec '25", 100102, 710],["Jan '26", 199339, 1007],
+    ["Feb '26", 198468, 1210],["Mar '26", 201607, 1013],["Apr '26", 190774, 1514],
+    ["May '26", 151087, 1238],["Jun '26", 48607, 884]
+  ];
+
+  const svg = document.getElementById('fhc-chart');
+  const W = 820, H = 320;
+  const padL = 52, padR = 52, padT = 16, padB = 40;
+  const chartW = W - padL - padR;
+  const chartH = H - padT - padB;
+  const n = data.length;
+  const barW = chartW / n * 0.5;
+  const gap = chartW / n;
+
+  const maxSpend = 300000; // round number for clean axis
+  const maxCPL = 4500;
+
+  let svgContent = '';
+
+  // ── Y-axis gridlines + labels (LEFT = spend) ──
+  const spendTicks = [0, 75000, 150000, 225000, 300000];
+  spendTicks.forEach(t => {
+    const y = padT + chartH - (t / maxSpend) * chartH;
+    svgContent += `<line x1="${padL}" y1="${y.toFixed(1)}" x2="${W - padR}" y2="${y.toFixed(1)}" stroke="#94A3B8" stroke-opacity="0.08" stroke-width="1"/>`;
+    const label = t === 0 ? '₹0' : `₹${(t/1000).toFixed(0)}k`;
+    svgContent += `<text x="${padL - 10}" y="${(y+3).toFixed(1)}" font-size="10" fill="#64748B" text-anchor="end" font-family="Inter, sans-serif">${label}</text>`;
+  });
+
+  // ── Y-axis labels (RIGHT = CPL) ──
+  const cplTicks = [0, 1125, 2250, 3375, 4500];
+  cplTicks.forEach(t => {
+    const y = padT + chartH - (t / maxCPL) * chartH;
+    const label = t === 0 ? '₹0' : `₹${t.toLocaleString('en-IN')}`;
+    svgContent += `<text x="${W - padR + 10}" y="${(y+3).toFixed(1)}" font-size="10" fill="#06B6D4" text-anchor="start" font-family="Inter, sans-serif">${label}</text>`;
+  });
+
+  // Axis titles
+  svgContent += `<text x="${padL}" y="${padT - 4}" font-size="9" fill="#64748B" text-anchor="start" font-family="Inter, sans-serif" font-weight="600">SPEND (₹)</text>`;
+  svgContent += `<text x="${W - padR}" y="${padT - 4}" font-size="9" fill="#06B6D4" text-anchor="end" font-family="Inter, sans-serif" font-weight="600">CPL (₹)</text>`;
+
+  // ── Bars (spend) ──
+  data.forEach((d, i) => {
+    const x = padL + i * gap + (gap - barW) / 2;
+    const barH = (d[1] / maxSpend) * chartH;
+    const y = padT + chartH - barH;
+    svgContent += `<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${barW.toFixed(1)}" height="${barH.toFixed(1)}" rx="2" fill="#1B4FD8" opacity="0.5"/>`;
+  });
+
+  // ── CPL line ──
+  let linePoints = data.map((d, i) => {
+    const x = padL + i * gap + gap / 2;
+    const y = padT + chartH - (d[2] / maxCPL) * chartH;
+    return `${x.toFixed(1)},${y.toFixed(1)}`;
+  }).join(' ');
+  svgContent += `<polyline points="${linePoints}" fill="none" stroke="#06B6D4" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>`;
+
+  // ── CPL dots + highlight best/worst ──
+  const maxCplVal = Math.max(...data.map(d => d[2]));
+  const minCplVal = Math.min(...data.slice(0, -1).map(d => d[2])); // exclude partial Jun '26
+
+  data.forEach((d, i) => {
+    const x = padL + i * gap + gap / 2;
+    const y = padT + chartH - (d[2] / maxCPL) * chartH;
+    const isMax = d[2] === maxCplVal;
+    const isMin = d[2] === minCplVal;
+
+    if (isMax) {
+      svgContent += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="6" fill="none" stroke="#FF8A8A" stroke-width="1.5"/>`;
+      svgContent += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="3.5" fill="#FF8A8A"/>`;
+      svgContent += `<text x="${x.toFixed(1)}" y="${(y-12).toFixed(1)}" font-size="10" fill="#FF8A8A" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-weight="700">₹${d[2].toLocaleString('en-IN')} peak</text>`;
+    } else if (isMin) {
+      svgContent += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="6" fill="none" stroke="#06B6D4" stroke-width="1.5"/>`;
+      svgContent += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="3.5" fill="#06B6D4"/>`;
+      svgContent += `<text x="${x.toFixed(1)}" y="${(y-12).toFixed(1)}" font-size="10" fill="#06B6D4" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-weight="700">₹${d[2].toLocaleString('en-IN')} lowest</text>`;
+    } else {
+      svgContent += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="2.5" fill="#06B6D4"/>`;
+    }
+  });
+
+  // ── X-axis labels (every other month) ──
+  data.forEach((d, i) => {
+    if (i % 2 === 0) {
+      const x = padL + i * gap + gap / 2;
+      svgContent += `<text x="${x.toFixed(1)}" y="${H - 14}" font-size="9" fill="#64748B" text-anchor="middle" font-family="Inter, sans-serif">${d[0]}</text>`;
+    }
+  });
+
+  // Baseline
+  svgContent += `<line x1="${padL}" y1="${padT + chartH}" x2="${W - padR}" y2="${padT + chartH}" stroke="#94A3B8" stroke-opacity="0.2" stroke-width="1"/>`;
+
+  svg.innerHTML = svgContent;
+  svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+})();
+</script>
 
 </body>
 </html>
