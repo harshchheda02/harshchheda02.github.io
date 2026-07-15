@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zepto — Execution at Scale — Harsh Chheda</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0A0E1A; --navy-mid: #111827; --navy-card: #161D2E;
+    --blue: #1B4FD8; --cyan: #06B6D4; --cyan-dim: rgba(6,182,212,0.12);
+    --white: #F8FAFC; --muted: #94A3B8; --muted-dark: #64748B;
+    --border: rgba(255,255,255,0.07); --text: #E2E8F0;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', sans-serif; background: var(--navy); color: var(--text); font-size: 16px; line-height: 1.7; }
+  h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; font-weight: 600; line-height: 1.15; }
+
+  nav {
+    position: sticky; top: 0; z-index: 100; padding: 18px 60px;
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(10,14,26,0.9); backdrop-filter: blur(12px); border-bottom: 0.5px solid var(--border);
+  }
+  .back-link { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 500; color: var(--muted); text-decoration: none; }
+  .back-link:hover { color: var(--cyan); }
+  .nav-cta { background: var(--cyan); color: var(--navy); padding: 9px 20px; border-radius: 7px; font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 13px; text-decoration: none; }
+
+  .cs-hero { padding: 80px 60px 60px; max-width: 980px; margin: 0 auto; border-bottom: 0.5px solid var(--border); }
+  .cs-eyebrow { display: flex; align-items: center; gap: 10px; font-size: 12px; font-weight: 600; color: var(--cyan); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 20px; }
+  .cs-eyebrow::before { content: ''; width: 24px; height: 1px; background: var(--cyan); }
+  .cs-title { font-size: clamp(32px, 4vw, 48px); font-weight: 700; color: var(--white); letter-spacing: -0.02em; margin-bottom: 18px; line-height: 1.1; }
+  .cs-subtitle { font-size: 18px; color: var(--muted); max-width: 660px; margin-bottom: 36px; line-height: 1.6; }
+  .cs-meta-row { display: flex; gap: 36px; flex-wrap: wrap; }
+  .cs-meta-label { font-size: 11px; color: var(--muted-dark); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 4px; }
+  .cs-meta-value { font-family: 'Space Grotesk', sans-serif; font-size: 14px; font-weight: 600; color: var(--text); }
+
+  .metrics-band { max-width: 980px; margin: 0 auto; padding: 48px 60px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; border-bottom: 0.5px solid var(--border); }
+  .metric-num { font-family: 'Space Grotesk', sans-serif; font-size: clamp(24px, 2.6vw, 32px); font-weight: 700; color: var(--white); letter-spacing: -0.02em; line-height: 1; }
+  .metric-num .accent { color: var(--cyan); }
+  .metric-label { font-size: 12px; color: var(--muted); margin-top: 8px; line-height: 1.4; }
+
+  .cs-section { max-width: 760px; margin: 0 auto; padding: 56px 60px; border-bottom: 0.5px solid var(--border); }
+  .cs-section:last-of-type { border-bottom: none; }
+  .cs-section-label { font-size: 11px; font-weight: 600; color: var(--cyan); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 16px; }
+  .cs-section-title { font-size: 26px; font-weight: 700; color: var(--white); letter-spacing: -0.01em; margin-bottom: 24px; }
+  .cs-section p { color: var(--muted); font-size: 15px; line-height: 1.8; margin-bottom: 18px; }
+  .cs-section p strong { color: var(--text); font-weight: 500; }
+  .cs-section ul { margin: 20px 0; padding-left: 0; list-style: none; }
+  .cs-section li { color: var(--muted); font-size: 15px; line-height: 1.7; margin-bottom: 14px; padding-left: 22px; position: relative; }
+  .cs-section li::before { content: '→'; position: absolute; left: 0; color: var(--cyan); font-size: 13px; }
+  .cs-section li strong { color: var(--text); font-weight: 500; }
+
+  .category-card { padding: 20px; margin: 16px 0; border-radius: 10px; background: var(--navy-card); border: 0.5px solid var(--border); }
+  .category-name { font-size: 15px; font-weight: 600; color: var(--white); margin-bottom: 8px; font-family: 'Space Grotesk', sans-serif; }
+  .category-row { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+  .category-stat { font-size: 12px; color: var(--muted); }
+  .category-stat strong { color: var(--cyan); font-weight: 600; }
+  .category-desc { font-size: 13px; color: var(--muted-dark); line-height: 1.6; }
+
+  .city-grid { display: flex; flex-wrap: wrap; gap: 6px; margin: 20px 0; }
+  .city-pill { font-size: 11px; font-weight: 500; padding: 5px 12px; border-radius: 20px; background: var(--navy-card); border: 0.5px solid var(--border); color: var(--muted); }
+  .city-pill.state { color: var(--cyan); border-color: rgba(6,182,212,0.25); }
+
+  .quote-block {
+    margin: 28px 0; padding: 24px 28px; border-left: 2px solid var(--cyan);
+    background: rgba(6,182,212,0.04); border-radius: 0 10px 10px 0;
+  }
+  .quote-block p { color: var(--text); font-size: 15px; font-style: italic; margin: 0; }
+
+  .data-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 13px; }
+  .data-table th { text-align: left; padding: 10px 12px; color: var(--muted-dark); font-weight: 500; font-size: 11px; letter-spacing: 0.04em; text-transform: uppercase; border-bottom: 0.5px solid var(--border); }
+  .data-table td { padding: 10px 12px; color: var(--text); border-bottom: 0.5px solid var(--border); }
+  .data-table tr:last-child td { border-bottom: none; }
+
+  .cs-cta { max-width: 760px; margin: 0 auto; padding: 56px 60px 80px; }
+  .cs-cta-box { padding: 32px; border-radius: 14px; background: var(--navy-card); border: 0.5px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+  .cs-cta-text h3 { font-size: 18px; color: var(--white); margin-bottom: 6px; }
+  .cs-cta-text p { font-size: 13px; color: var(--muted-dark); margin: 0; }
+  .cs-cta-actions { display: flex; gap: 10px; }
+  .btn-primary { background: var(--cyan); color: var(--navy); font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 13px; padding: 11px 22px; border-radius: 7px; text-decoration: none; white-space: nowrap; }
+  .btn-secondary { background: transparent; color: var(--text); font-family: 'Space Grotesk', sans-serif; font-weight: 500; font-size: 13px; padding: 11px 22px; border-radius: 7px; border: 0.5px solid rgba(255,255,255,0.2); text-decoration: none; white-space: nowrap; }
+
+  footer { text-align: center; padding: 28px; font-size: 12px; color: var(--muted-dark); }
+
+  @media (max-width: 768px) {
+    nav { padding: 14px 20px; }
+    .cs-hero { padding: 48px 20px 40px; }
+    .cs-title { font-size: 26px; }
+    .cs-subtitle { font-size: 15px; }
+    .metrics-band { grid-template-columns: 1fr 1fr; padding: 32px 20px; gap: 24px 16px; }
+    .cs-section { padding: 36px 20px; }
+    .cs-section-title { font-size: 21px; }
+    .cs-cta { padding: 36px 20px 56px; }
+    .cs-cta-box { flex-direction: column; align-items: flex-start; padding: 24px; }
+    .cs-cta-actions { width: 100%; }
+    .cs-cta-actions a { flex: 1; text-align: center; }
+    .category-row { flex-direction: column; gap: 4px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html#work" class="back-link">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    Back to portfolio
+  </a>
+  <a href="index.html#contact" class="nav-cta">Hire Me</a>
+</nav>
+
+<div class="cs-hero">
+  <div class="cs-eyebrow">Execution Deep-Dive · App Growth</div>
+  <h1 class="cs-title">Running Zepto's UA engine at 50+ city scale</h1>
+  <p class="cs-subtitle">
+    This isn't a strategy case study. I didn't own the planning here. This is what daily execution and reporting actually looked like across three simultaneous campaign categories, dozens of city launches, and a reporting stack built from scratch.
+  </p>
+  <div class="cs-meta-row">
+    <div class="cs-meta-item">
+      <div class="cs-meta-label">Client</div>
+      <div class="cs-meta-value">Zepto</div>
+    </div>
+    <div class="cs-meta-item">
+      <div class="cs-meta-label">Timeline</div>
+      <div class="cs-meta-value">Jul 2024 – Mar 2025</div>
+    </div>
+    <div class="cs-meta-item">
+      <div class="cs-meta-label">My Role</div>
+      <div class="cs-meta-value">Execution & Reporting (not strategy)</div>
+    </div>
+    <div class="cs-meta-item">
+      <div class="cs-meta-label">Platforms</div>
+      <div class="cs-meta-value">Google UAC · Meta · Snapchat · ASA</div>
+    </div>
+  </div>
+</div>
+
+<div class="metrics-band">
+  <div class="metric-block">
+    <div class="metric-num">40-70L</div>
+    <div class="metric-label">App installs per month</div>
+  </div>
+  <div class="metric-block">
+    <div class="metric-num">50<span class="accent">+</span></div>
+    <div class="metric-label">Cities/states launched</div>
+  </div>
+  <div class="metric-block">
+    <div class="metric-num">3</div>
+    <div class="metric-label">Campaign categories run in parallel</div>
+  </div>
+  <div class="metric-block">
+    <div class="metric-num">50<span class="accent">%</span></div>
+    <div class="metric-label">Manual reporting time saved</div>
+  </div>
+</div>
+
+<div class="cs-section">
+  <div class="cs-section-label">A Note on Scope</div>
+  <h2 class="cs-section-title">Why this isn't a "case study"</h2>
+  <p>
+    Unlike Durian FHC, where I owned media planning end-to-end, Zepto was a different kind of role. I didn't set the strategy or own client-facing decisions. My work was <strong>execution and reporting</strong>: turning the planned campaign structure into reality every single day, across three categories, at a scale where a missed step means lakhs of rupees going the wrong way overnight.
+  </p>
+  <p>
+    I wanted this page to be honest about that distinction. What follows isn't about strategy. It's about what it actually took to keep this machine running."
+  </p>
+</div>
+
+<div class="cs-section">
+  <div class="cs-section-label">The Three Categories</div>
+  <h2 class="cs-section-title">Three engines, three different KPIs, running every day</h2>
+  <p>Zepto's UA account wasn't one campaign. It was three distinct operations, each with its own logic, audience, and success metric.</p>
+
+  <div class="category-card">
+    <div class="category-name">1. Core UAC: Established Cities</div>
+    <div class="category-row">
+      <span class="category-stat">Spend: <strong>₹75–125Cr/month</strong> at peak</span>
+      <span class="category-stat">KPI: <strong>First Orders</strong></span>
+      <span class="category-stat">CAC: <strong>₹130–180</strong></span>
+    </div>
+    <div class="category-desc">Running across Bangalore, Delhi, Kolkata, Pune, Mumbai, Chennai, Hyderabad and more — split by Android/iOS and by campaign type (tROAS, TCPA). This was the highest-spend, highest-stakes category, where daily pacing checks and budget reallocation between cities happened constantly.</div>
+  </div>
+
+  <div class="category-card">
+    <div class="category-name">2. New City / State Launch</div>
+    <div class="category-row">
+      <span class="category-stat">Spend: <strong>₹9–17Cr/month</strong></span>
+      <span class="category-stat">KPI: <strong>Installs → First Orders</strong></span>
+      <span class="category-stat">Phases: <strong>Pre-Launch → Launch → Post-Launch</strong></span>
+    </div>
+    <div class="category-desc">Every new city got its own campaign lifecycle, independent of the core account. A city wasn't just "added". It went through a Pre-Launch awareness phase, a Launch phase optimised for installs, then a Post-Launch shift toward First Orders, each phase with its own creative set and targeting logic.</div>
+  </div>
+
+  <div class="category-card">
+    <div class="category-name">3. Remarketing (RMKT)</div>
+    <div class="category-row">
+      <span class="category-stat">Spend: <strong>₹20–24Cr/month</strong></span>
+      <span class="category-stat">KPI: <strong>Repeat Orders</strong></span>
+      <span class="category-stat">Cost/RO: <strong>₹15–25</strong></span>
+    </div>
+    <div class="category-desc">Built entirely around recency and frequency cohorts rather than geography. Audience cohorts: Active, Lapsed, ELC (Existing/Lapsed Cohort), and Super Saver segments, each further sliced by windows like "ordered 5+ times in 30 days" or "dormant for 7+ days." A completely different targeting logic from the acquisition side.</div>
+  </div>
+
+  <p style="margin-top:8px;">Across these three categories, peak combined monthly spend regularly crossed <strong>₹150Cr</strong>.</p>
+</div>
+
+<div class="cs-section">
+  <div class="cs-section-label">The Scale Problem</div>
+  <h2 class="cs-section-title">50+ cities and states, each launched on its own clock</h2>
+  <p>
+    Over the course of this account, new city and state launches included:
+  </p>
+  <div class="city-grid">
+    <span class="city-pill">Ahmedabad</span><span class="city-pill">Nashik</span><span class="city-pill">Lucknow</span>
+    <span class="city-pill">Jaipur</span><span class="city-pill">Chandigarh</span><span class="city-pill">Kochi</span>
+    <span class="city-pill">Coimbatore</span><span class="city-pill">Kanpur</span><span class="city-pill">Indore</span>
+    <span class="city-pill">Rajkot</span><span class="city-pill">Surat</span><span class="city-pill">Vadodara</span>
+    <span class="city-pill">Vijayawada</span><span class="city-pill">Mysore</span><span class="city-pill">Tiruchirappalli</span>
+    <span class="city-pill">Varanasi</span><span class="city-pill">Dehradun</span><span class="city-pill">Salem</span>
+    <span class="city-pill">Patiala</span><span class="city-pill">Amritsar</span><span class="city-pill">Karnal</span>
+    <span class="city-pill">Hisar</span><span class="city-pill">Kurukshetra</span><span class="city-pill">Warangal</span>
+    <span class="city-pill">Udaipur</span><span class="city-pill">Meerut</span><span class="city-pill">Bhiwadi</span>
+    <span class="city-pill">+ 25 more cities</span>
+    <span class="city-pill state">Kerala (state)</span><span class="city-pill state">Maharashtra (state)</span>
+    <span class="city-pill state">Karnataka (state)</span><span class="city-pill state">Gujarat (state)</span>
+    <span class="city-pill state">Tamil Nadu (state)</span><span class="city-pill state">+ 4 more states</span>
+  </div>
+  <p>
+    Each one needed its own campaign tree built, monitored, and transitioned through phases on a different timeline while the core and RMKT accounts kept running in parallel.
+  </p>
+</div>
+
+<div class="cs-section">
+  <div class="cs-section-label">The Daily Reality</div>
+  <h2 class="cs-section-title">What execution at this scale actually looked like</h2>
+  <p>Some things that came up constantly but never show up in any dashboard:</p>
+  <ul>
+    <li><strong>Hitting Google's ad limits.</strong> At this campaign volume, we regularly hit Google's per-ad-group and per-campaign ad limits. The fix wasn't glamorous. It meant going in and deleting underperforming ads and ad groups to free up space for new product- or category-based creatives, every time we wanted to test something new.</li>
+    <li><strong>Daily pacing across three categories simultaneously.</strong> A budget issue in core UAC, a new city hitting its Launch phase, and an RMKT audience refresh could all need attention on the same day. There was no "one thing at a time."</li>
+    <li><strong>Reporting that had to be airtight.</strong> With this much spend moving daily, the automated reporting stack (performance, creative, ad strength, post-campaign) wasn't a nice-to-have. It was the only way to catch a problem before it became an expensive one.</li>
+  </ul>
+  <div class="quote-block">
+    <p>This account ran on a different clock. Most days meant 10–12 hours actively in the account, not because of inefficiency, but because the scale and pace genuinely demanded it. The whole team worked this way — the account was growing too fast for it to be any other way.</p>
+  </div>
+</div>
+
+<div class="cs-section">
+  <div class="cs-section-label">What I Took From It</div>
+  <h2 class="cs-section-title">Execution discipline at scale</h2>
+  <p>
+    I didn't set strategy here, but I learned what it takes to actually execute someone else's strategy at scale. At a volume where small process gaps compound fast. That discipline is exactly what let me take full ownership on Durian FHC afterward, with the reporting rigor and pacing instincts this account forced me to build first.
+  </p>
+</div>
+
+<div class="cs-cta">
+  <div class="cs-cta-box">
+    <div class="cs-cta-text">
+      <h3>Want the full breakdown?</h3>
+      <p>Happy to walk through the campaign structure and reporting setup in detail.</p>
+      <p style="margin-top:10px;font-size:13px;color:var(--muted);">
+        <a href="mailto:2002harshchheda@gmail.com" style="color:var(--cyan);text-decoration:none;">2002harshchheda@gmail.com</a>
+        &nbsp;·&nbsp;
+        <a href="tel:+919326074411" style="color:var(--cyan);text-decoration:none;">+91 93260 74411</a>
+      </p>
+    </div>
+    <div class="cs-cta-actions">
+      <a href="index.html#work" class="btn-secondary">View other work</a>
+      <a href="index.html#contact" class="btn-primary">Get in touch</a>
+    </div>
+  </div>
+</div>
+
+<footer>© 2026 Harsh Chheda · Paid Media Analyst, Mumbai</footer>
+
+</body>
+</html>
